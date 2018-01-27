@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Sortable Accordians</title>
+
+    <!-- start of css -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="app.css" rel="stylesheet" type="text/css" />
+    <!-- end of css -->
+</head>
+
+<body ng-app="accordianApp" ng-cloak>
+    <div ng-controller="accordianController">
+        <div class="row">
+            <div class="col-md-12 mainHeader">
+                Sortable accordians with rotating icon
+            </div>
+        </div>
+        <div class="row" style="margin:100px">
+            <div class="col-md-12">
+                <ul ui-sortable="sortableOptions" class="accordianWrapper" ng-model="accordianList">
+                    <li ng-repeat="accord in accordianList track by $index" class="singleAccord">
+                        <div ng-click="open($index)" class="accordianTitle" ng-class="{'openedAccordianTitle':accord.open,'closedAccordianTitle':!accord.open}">
+                            <div class='pull-left'>
+                                <span class="handle">
+                                <img ng-if="accord.open" src="images/accordBlue.svg" style="height: 22px;cursor: move;" />
+                                <img ng-if="!accord.open" src="images/accordGray.svg" style="height: 22px;cursor: move;" />
+                            </span>
+                                <span style="margin-left:10px">{{accord.title}}{{$index + 1}}</span>
+                            </div>
+                            <div class='pull-right'>
+                                <i ng-class="{'rotateAngle':accord.open,'rotateReverseAngle':!accord.open}" class="glyphicon glyphicon-chevron-down"></i>
+                            </div>
+                            <div class='clearfix'></div>
+                        </div>
+                        <div ng-show="accord.open" class="accordianBody animate-show-hide">
+                            <div class="mainSection cb">
+                                {{accord.desc}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- start of scripts -->
+    <script src="vendor/jquery.min.js"></script>
+    <script src="vendor/jquery-ui.min.js"></script>
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/bootstrap.min.js"></script>
+    <script src="vendor/sortable.min.js"></script>
+    <script src="vendor/angular-animate.js"></script>
+    <script src="app.js"></script>
+    <script src="accordianController.js"></script>
+    <!-- end of scripts -->
+</body>
+
+</html>
